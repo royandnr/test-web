@@ -1,0 +1,551 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Praktik Psikologi — NamaUsaha</title>
+  <meta name="description" content="Praktik Psikologi — Konsultasi, Terapi, Tes Kepribadian, dan Konseling Karier."/>
+  <link rel="icon" href="data:;base64,iVBORw0KGgo=">
+
+  <!-- ======= Styles (internal) ======= -->
+  <style>
+    /* ---------- Root theme (edit warna di sini) - DOMINAN PASTEL TERANG ---------- */
+    :root{
+      --bg: #FFF8DC;           /* krem muda */
+      --card: #ffffff;
+      --muted: #5C5C5C;
+      --accent: #F9C6E0;       /* pink lembut - utama */
+      --accent-2: #7E88B8;     /* biru keunguan - aksen */
+      --text: #2E3F58;         /* biru gelap untuk teks */
+      --radius: 14px;
+      --max-width: 1100px;
+      --glass: rgba(255,255,255,0.85);
+      --shadow: 0 8px 24px rgba(46,63,88,0.08);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+
+    /* ---------- Reset & layout ---------- */
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      background: linear-gradient(180deg,var(--bg),var(--accent) 60%);
+      color:var(--text);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.45;
+    }
+    .container{max-width:var(--max-width);margin:0 auto;padding:24px;}
+
+    /* ---------- Header / Nav ---------- */
+    header{
+      position:sticky;top:12px;z-index:40;
+      background:transparent;
+      padding:12px 0;
+    }
+    .nav{
+      display:flex;align-items:center;justify-content:space-between;gap:16px;
+      background:linear-gradient(90deg, rgba(255,255,255,0.72), rgba(255,255,255,0.55));
+      padding:10px 16px;border-radius:12px;box-shadow:var(--shadow);
+      backdrop-filter: blur(6px);
+    }
+    .brand{display:flex;gap:12px;align-items:center;text-decoration:none;color:inherit}
+    .logo{
+      width:48px;height:48px;border-radius:10px;
+      background:linear-gradient(135deg,var(--accent),var(--accent-2));
+      display:grid;place-items:center;color:#fff;font-weight:700;font-size:18px;
+      box-shadow:0 6px 18px rgba(46,63,88,0.18);
+    }
+    nav ul{list-style:none;margin:0;padding:0;display:flex;gap:10px;align-items:center}
+    nav a{padding:8px 12px;text-decoration:none;border-radius:10px;color:var(--text);font-weight:600}
+    nav a.active, nav a:hover{background:rgba(249,198,224,0.28);color:var(--accent-2)}
+
+    .cta{
+      display:inline-flex;align-items:center;gap:8px;background:var(--accent-2);color:#fff;padding:8px 12px;border-radius:10px;
+      text-decoration:none;font-weight:700;box-shadow:0 6px 18px rgba(46,63,88,0.12)
+    }
+
+    /* ---------- Hero ---------- */
+    .hero{
+      display:grid;grid-template-columns:1fr 420px;gap:30px;align-items:center;margin-top:28px;
+    }
+    .hero-card{
+      background:linear-gradient(180deg, rgba(255,255,255,0.95), rgba(255,255,255,0.92));
+      padding:28px;border-radius:var(--radius);box-shadow:var(--shadow);
+    }
+    .hero h1{font-size:28px;margin:0 0 8px;color:var(--text)}
+    .hero p{margin:0 0 16px;color:var(--muted)}
+    .hero .features{display:flex;gap:10px;flex-wrap:wrap}
+    .pill{padding:8px 12px;border-radius:999px;background:linear-gradient(90deg,var(--accent),rgba(249,198,224,0.9));border:1px solid rgba(126,136,184,0.08);font-weight:600;color:var(--text)}
+
+    /* ---------- Services grid ---------- */
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:20px}
+    .card{background:var(--card);padding:16px;border-radius:12px;box-shadow:0 6px 18px rgba(46,63,88,0.04)}
+    .card h3{margin:0 0 6px;color:var(--accent-2)}
+    .card p{margin:0;color:var(--muted);font-size:14px}
+
+    /* ---------- About & Profile ---------- */
+    .profile{display:flex;gap:18px;align-items:center}
+    .avatar{width:120px;height:120px;border-radius:16px;background:linear-gradient(135deg,#fff,var(--accent));display:grid;place-items:center;font-weight:700;color:var(--text);font-size:26px;border:1px solid rgba(46,63,88,0.08)}
+    .about-text{max-width:720px}
+
+    /* ---------- Articles list ---------- */
+    .article-list{display:grid;gap:12px}
+    .article-item{display:flex;gap:12px;align-items:flex-start;background:linear-gradient(180deg,rgba(255,255,255,0.95),#fff);padding:12px;border-radius:10px}
+    .article-item h4{margin:0 0 6px;color:var(--text)}
+    .meta{font-size:13px;color:var(--muted)}
+
+    /* ---------- Contact form ---------- */
+    .form-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    .input, textarea{
+      width:100%;padding:10px;border-radius:10px;border:1px solid rgba(46,63,88,0.08);font-size:14px;
+      background:transparent;outline:none;color:var(--text);
+    }
+    textarea{min-height:120px;resize:vertical}
+    .btn{display:inline-block;padding:10px 14px;border-radius:10px;border:0;background:var(--accent-2);color:#fff;font-weight:700;text-decoration:none;cursor:pointer}
+    .btn[style]{ /* keep inline reset button readable */ }
+    .muted{color:var(--muted);font-size:14px}
+
+    /* ---------- Footer ---------- */
+    footer{margin-top:36px;padding:18px 12px;border-radius:12px;background:linear-gradient(90deg,rgba(249,198,224,0.35),rgba(255,255,255,0.6));box-shadow:var(--shadow)}
+    .footer-grid{display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap}
+
+    /* ---------- Responsive ---------- */
+    @media (max-width:980px){
+      .hero{grid-template-columns:1fr}
+      .grid{grid-template-columns:repeat(2,1fr)}
+      .form-row{grid-template-columns:1fr}
+    }
+    @media (max-width:640px){
+      nav ul{display:none}
+      .nav{padding:10px}
+      .mobile-toggle{display:inline-flex}
+      .grid{grid-template-columns:1fr}
+    }
+
+    /* mobile nav overlay */
+    .mobile-toggle{display:none;background:transparent;border:0;font-weight:700}
+    .mobile-menu{position:fixed;inset:0;background:linear-gradient(180deg,rgba(126,136,184,0.08),rgba(249,198,224,0.9));display:none;padding:36px}
+    .mobile-menu.show{display:block}
+    .mobile-menu nav{display:block}
+    .mobile-menu nav a{display:block;padding:12px 8px;color:var(--text)}
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="container">
+      <div class="nav" role="navigation" aria-label="Main navigation">
+        <a class="brand" href="#home" data-link>
+          <div class="logo" aria-hidden="true">PS</div>
+          <div>
+            <div style="font-weight:800">NamaUsaha</div>
+            <div style="font-size:12px;color:var(--muted)">Praktik Psikologi & Konseling</div>
+          </div>
+        </a>
+
+        <nav>
+          <ul>
+            <li><a href="#home" data-link class="active">Home</a></li>
+            <li><a href="#tentang" data-link>Tentang</a></li>
+            <li><a href="#layanan" data-link>Layanan</a></li>
+            <li><a href="#artikel" data-link>Artikel</a></li>
+            <li><a href="#kontak" data-link>Kontak</a></li>
+          </ul>
+        </nav>
+
+        <div style="display:flex;gap:10px;align-items:center">
+          <!-- Edit nomor WA di data-whatsapp below -->
+          <a id="wa-cta" class="cta" href="#" target="_blank" rel="noopener" aria-label="Chat via WhatsApp">Chat WA</a>
+          <button class="mobile-toggle" id="mobileToggle" aria-expanded="false">☰</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile menu overlay -->
+  <div class="mobile-menu" id="mobileMenu">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+      <div style="font-weight:800">NamaUsaha</div>
+      <button id="mobileClose" aria-label="Close menu">✕</button>
+    </div>
+    <nav>
+      <a href="#home" data-link>Home</a>
+      <a href="#tentang" data-link>Tentang</a>
+      <a href="#layanan" data-link>Layanan</a>
+      <a href="#artikel" data-link>Artikel</a>
+      <a href="#kontak" data-link>Kontak</a>
+    </nav>
+  </div>
+
+  <main class="container" id="main">
+    <!-- ======= Home / Hero ======= -->
+    <section id="home" class="hero" aria-label="Home">
+      <div class="hero-card">
+        <p class="muted">Selamat datang di</p>
+        <h1>Praktik Psikologi — NamaUsaha</h1>
+        <p class="muted">Kami membantu Anda dengan konsultasi psikologis profesional: terapi, konseling karier, tes kepribadian, dan pendampingan keluarga. Aman, rahasia, dan penuh empati.</p>
+
+        <div style="display:flex;gap:12px;align-items:center;margin-top:14px">
+          <a class="btn" href="#kontak" data-link>Jadwalkan Konsultasi</a>
+          <a class="muted" href="#layanan" data-link>Lihat layanan →</a>
+        </div>
+
+        <div style="margin-top:18px" class="features">
+          <div class="pill">Konseling Privat</div>
+          <div class="pill">Terapi Kognitif</div>
+          <div class="pill">Tes Psikologi</div>
+          <div class="pill">Konseling Karier</div>
+        </div>
+
+        <div style="margin-top:20px" class="muted">Jam layanan: Senin–Sabtu, 09:00–17:00 • Lokasi: Kantor / Online</div>
+      </div>
+
+      <aside style="display:flex;flex-direction:column;gap:12px">
+        <div style="background:linear-gradient(180deg,#fff,var(--bg));padding:18px;border-radius:12px;box-shadow:var(--shadow)">
+          <h3 style="margin-top:0">Booking Cepat</h3>
+          <p class="muted" style="margin-bottom:12px">Isi form singkat ini, kami akan menghubungi via WhatsApp / email.</p>
+          <form id="quickBook" onsubmit="return false;">
+            <input class="input" id="qb_name" placeholder="Nama lengkap" required />
+            <input class="input" id="qb_phone" placeholder="No. WhatsApp" style="margin-top:8px" required />
+            <select class="input" id="qb_service" style="margin-top:8px">
+              <option value="Konsultasi">Konsultasi Umum</option>
+              <option value="Terapi">Terapi Individu</option>
+              <option value="Karier">Konseling Karier</option>
+              <option value="Tes">Tes Psikologis</option>
+            </select>
+            <div style="display:flex;gap:8px;margin-top:10px">
+              <button class="btn" type="button" onclick="submitQuickBooking()">Kirim</button>
+              <button class="btn" type="button" style="background:#fff1f5;color:var(--accent);font-weight:700;border:1px solid rgba(46,63,88,0.06)" onclick="clearQuickBooking()">Reset</button>
+            </div>
+            <div id="qb_msg" style="margin-top:8px;font-size:13px;color:var(--muted)"></div>
+          </form>
+        </div>
+
+        <div style="background:linear-gradient(90deg,var(--bg),#fff);padding:16px;border-radius:12px;box-shadow:var(--shadow);display:grid;gap:8px">
+          <div style="font-weight:800">Cara Pembayaran</div>
+          <div class="muted" style="font-size:13px">Transfer bank / e-wallet / pembayaran di tempat (jika bertemu langsung). Invoice akan dikirim setelah jadwal disepakati.</div>
+        </div>
+      </aside>
+    </section>
+
+    <!-- ======= Tentang Kami ======= -->
+    <section id="tentang" style="margin-top:36px">
+      <div class="hero-card">
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:18px;flex-wrap:wrap">
+          <div>
+            <h2 style="margin:0">Tentang Kami</h2>
+            <p class="muted">Praktik psikologi yang menyediakan layanan terapeutik dan asesmen psikologis. Kami berfokus pada pendekatan evidence-based, empati, dan etika profesional.</p>
+          </div>
+          <div style="text-align:right">
+            <div class="muted">Berlisensi & Berpengalaman</div>
+            <div style="font-weight:800;font-size:18px">Dr. Nama Psikolog, M.Psi., Psikolog</div>
+            <div class="muted" style="font-size:13px">No. SIP: 12345 • Spesialis: Terapi Kognitif & Konseling Keluarga</div>
+          </div>
+        </div>
+
+        <div style="margin-top:18px" class="profile">
+          <div class="avatar" aria-hidden="true">DP</div>
+          <div class="about-text">
+            <h3 style="margin-top:0">Visi & Misi</h3>
+            <p class="muted">Visi kami: Meningkatkan kesehatan mental komunitas melalui layanan yang mudah diakses dan berkualitas. Misi: Memberikan intervensi terapetik, edukasi, dan asesmen yang terintegrasi.</p>
+
+            <h4>Nilai Utama</h4>
+            <ul class="muted" style="margin-top:6px">
+              <li>Empati dan rahasia</li>
+              <li>Berbasis bukti</li>
+              <li>Profesional dan hangat</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======= Layanan ======= -->
+    <section id="layanan" style="margin-top:28px">
+      <h2>Layanan Kami</h2>
+      <p class="muted">Beragam layanan psikologi untuk individu, pasangan, keluarga, dan organisasi.</p>
+
+      <div class="grid" style="margin-top:12px">
+        <div class="card">
+          <h3>Konsultasi Individu</h3>
+          <p>Membantu menghadapi kecemasan, depresi, stres, dan isu personal lain lewat terapi singkat atau jangka panjang.</p>
+        </div>
+        <div class="card">
+          <h3>Terapi Pasangan & Keluarga</h3>
+          <p>Intervensi untuk memperbaiki komunikasi, konflik, dan dinamika hubungan keluarga.</p>
+        </div>
+        <div class="card">
+          <h3>Tes & Asesmen Psikologi</h3>
+          <p>Evaluasi kepribadian, IQ, minat karier, dan asesmen klinis (dengan laporan tertulis).</p>
+        </div>
+
+        <div class="card">
+          <h3>Konseling Karier</h3>
+          <p>Pendampingan pemilihan karier, pengembangan diri, dan persiapan rekrutmen.</p>
+        </div>
+        <div class="card">
+          <h3>Workshop & Pelatihan</h3>
+          <p>Workshop kesehatan mental untuk sekolah, kampus, dan perusahaan.</p>
+        </div>
+        <div class="card">
+          <h3>Konsultasi Online</h3>
+          <p>Sesi via video call untuk klien di luar kota atau yang memilih sesi jarak jauh.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======= Artikel ======= -->
+    <section id="artikel" style="margin-top:28px">
+      <h2>Artikel & Edukasi</h2>
+      <p class="muted">Tulisan singkat untuk edukasi kesehatan mental — update berkala.</p>
+
+      <div class="article-list" style="margin-top:12px" id="articles">
+        <!-- Artikel di-generate oleh JS; contoh diisi -->
+      </div>
+
+      <div style="margin-top:12px">
+        <a class="muted" href="#" onclick="openEditor()">Tambah artikel contoh</a>
+      </div>
+    </section>
+
+    <!-- ======= Kontak ======= -->
+    <section id="kontak" style="margin-top:28px">
+      <h2>Kontak & Jadwalkan</h2>
+      <div style="display:grid;grid-template-columns:1fr 360px;gap:18px;align-items:start">
+        <div class="hero-card">
+          <h3 style="margin-top:0">Form Konsultasi</h3>
+          <p class="muted">Isi detail singkat, atau hubungi melalui WhatsApp / email.</p>
+          <form id="contactForm" onsubmit="return false;">
+            <div class="form-row">
+              <input class="input" id="name" placeholder="Nama lengkap" required />
+              <input class="input" id="phone" placeholder="No. WhatsApp" required />
+            </div>
+            <div style="margin-top:8px">
+              <input class="input" id="email" placeholder="Email (opsional)" />
+            </div>
+            <div style="margin-top:8px">
+              <select class="input" id="service">
+                <option value="Konsultasi">Konsultasi Umum</option>
+                <option value="Terapi">Terapi Individu</option>
+                <option value="Pasangan">Terapi Pasangan</option>
+                <option value="Tes">Tes Psikologi</option>
+              </select>
+            </div>
+            <div style="margin-top:8px">
+              <textarea id="message" placeholder="Cerita singkat atau keluhan"></textarea>
+            </div>
+            <div style="display:flex;gap:8px;margin-top:10px;align-items:center">
+              <button class="btn" onclick="submitContact()">Kirim Permintaan</button>
+              <button class="btn" style="background:#fff1f5;color:var(--accent);font-weight:700;border:1px solid rgba(46,63,88,0.06)" onclick="clearContact()">Reset</button>
+              <div id="contact-feedback" style="margin-left:auto;color:var(--muted);font-size:13px"></div>
+            </div>
+          </form>
+
+          <div style="margin-top:14px" class="muted">
+            <strong>Alamat:</strong> Jalan Contoh No.1, Kota<br>
+            <strong>Email:</strong> contoh@domain.com<br>
+            <strong>Telepon / WA:</strong> +62 821-4121-2657
+          </div>
+        </div>
+
+        <aside style="display:flex;flex-direction:column;gap:12px">
+          <div class="card">
+            <h4 style="margin:0">Jadwal</h4>
+            <p class="muted" style="margin-top:6px">Senin–Sabtu: 09:00–17:00<br>Minggu: Libur / by appointment</p>
+          </div>
+
+          <div class="card">
+            <h4 style="margin:0">Metode Sesi</h4>
+            <p class="muted" style="margin-top:6px">Online (video call) atau tatap muka. Pilih waktu pada konfirmasi jadwal.</p>
+          </div>
+
+          <div class="card">
+            <h4 style="margin:0">Catatan</h4>
+            <p class="muted" style="margin-top:6px">Semua sesi bersifat rahasia. Laporan tertulis tersedia untuk asesmen berbayar.</p>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- ======= Footer ======= -->
+    <footer>
+      <div class="footer-grid">
+        <div>
+          <div style="font-weight:800">NamaUsaha — Praktik Psikologi</div>
+          <div class="muted" style="font-size:13px">© <span id="year"></span> NamaUsaha. Semua hak dilindungi.</div>
+        </div>
+
+        <div style="display:flex;gap:12px;align-items:center">
+          <a class="muted" href="#" onclick="openPrivacy()">Kebijakan Privasi</a>
+          <a class="muted" href="#" onclick="openTerms()">Syarat & Ketentuan</a>
+        </div>
+      </div>
+    </footer>
+  </main>
+
+  <!-- ======= Scripts ======= -->
+  <script>
+    /* ===========================
+       Editable settings (ganti sesuai usaha)
+       =========================== */
+    const SETTINGS = {
+      businessName: "Nesya Praktikum",
+      whatsappNumber: "+6282141212657", // format internasional (contoh: +62812...)
+      whatsappMessage: "Halo Nesyaa, saya mau daftar konsultasi yaa.", // pesan default WA
+      email: "contoh@domain.com",
+      location: "Jalan Contoh No.1, Kota",
+    };
+
+    /* Apply settings to UI */
+    document.getElementById('wa-cta').href = makeWhatsAppLink(SETTINGS.whatsappNumber, SETTINGS.whatsappMessage);
+    document.getElementById('wa-cta').textContent = "Chat WhatsApp";
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // helper: make WA link
+    function makeWhatsAppLink(num, text){
+      const phone = num.replace(/[^+\d]/g,''); // sanitize
+      return "https://wa.me/" + phone.replace('+','') + "?text=" + encodeURIComponent(text);
+    }
+
+    /* ========== Mobile nav toggles ========== */
+    document.getElementById('mobileToggle').addEventListener('click', ()=>{
+      const menu = document.getElementById('mobileMenu');
+      menu.classList.add('show');
+      document.getElementById('mobileToggle').setAttribute('aria-expanded','true');
+    });
+    document.getElementById('mobileClose').addEventListener('click', ()=>{
+      document.getElementById('mobileMenu').classList.remove('show');
+      document.getElementById('mobileToggle').setAttribute('aria-expanded','false');
+    });
+    // close mobile menu when link clicked
+    document.querySelectorAll('[data-link]').forEach(el=>{
+      el.addEventListener('click', (e)=>{
+        document.getElementById('mobileMenu').classList.remove('show');
+        // smooth scroll to target
+        const href = el.getAttribute('href');
+        if(href && href.startsWith('#')){
+          e.preventDefault();
+          const target = document.querySelector(href);
+          if(target) target.scrollIntoView({behavior:'smooth', block:'start'});
+          // set active class
+          document.querySelectorAll('nav a').forEach(a=>a.classList.remove('active'));
+          document.querySelectorAll('nav a').forEach(a=>{ if(a.getAttribute('href')===href) a.classList.add('active') });
+        }
+      });
+    });
+
+    /* ========== Quick booking (mock) ========== */
+    function submitQuickBooking(){
+      const name = document.getElementById('qb_name').value.trim();
+      const phone = document.getElementById('qb_phone').value.trim();
+      const service = document.getElementById('qb_service').value;
+      const msg = document.getElementById('qb_msg');
+
+      if(!name || !phone){ msg.textContent = 'Isi nama dan no. WhatsApp terlebih dahulu.'; return; }
+
+      // Create a WhatsApp prefilled message for booking
+      const text = `Halo, saya ${name}. Saya ingin booking layanan: ${service}. No: ${phone}`;
+      const wa = makeWhatsAppLink(SETTINGS.whatsappNumber, text);
+      msg.innerHTML = 'Sedang menyiapkan chat WhatsApp... <a href="'+wa+'" target="_blank">Klik untuk lanjut ke WhatsApp</a>';
+    }
+    function clearQuickBooking(){
+      document.getElementById('qb_name').value='';
+      document.getElementById('qb_phone').value='';
+      document.getElementById('qb_msg').textContent='';
+    }
+
+    /* ========== Contact form (mock save to localStorage & WA link) ========== */
+    function submitContact(){
+      const name = document.getElementById('name').value.trim();
+      const phone = document.getElementById('phone').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const service = document.getElementById('service').value;
+      const message = document.getElementById('message').value.trim();
+      const feedback = document.getElementById('contact-feedback');
+
+      if(!name || !phone){
+        feedback.textContent = 'Nama dan No. WhatsApp wajib diisi.';
+        return;
+      }
+      // Save to localStorage (mock database)
+      const submissions = JSON.parse(localStorage.getItem('psikologi_submissions') || '[]');
+      submissions.push({name,phone,email,service,message,ts:new Date().toISOString()});
+      localStorage.setItem('psikologi_submissions', JSON.stringify(submissions));
+
+      // Prepare WA message to continue booking
+      const text = `Halo, saya ${name}. Layanan: ${service}. Pesan: ${message}. Email: ${email || '-'}. No: ${phone}`;
+      const wa = makeWhatsAppLink(SETTINGS.whatsappNumber, text);
+
+      feedback.innerHTML = `Terkirim. <a href="${wa}" target="_blank">Klik untuk konfirmasi via WhatsApp</a>`;
+      // Optionally clear form
+      // clearContact();
+    }
+    function clearContact(){
+      document.getElementById('name').value='';
+      document.getElementById('phone').value='';
+      document.getElementById('email').value='';
+      document.getElementById('message').value='';
+      document.getElementById('contact-feedback').textContent='';
+    }
+
+    /* ========== Articles: sample generator (editable) ========== */
+    const sampleArticles = [
+      {title:"Mengelola Kecemasan Sehari-hari", date:"2025-01-15", excerpt:"Strategi sederhana untuk mengurangi kecemasan: pernapasan, penjadwalan, dan batasi konsumsi berita."},
+      {title:"Tanda-tanda Burnout di Tempat Kerja", date:"2025-02-20", excerpt:"Burnout berbeda dari stres biasa. Kenali tanda fisik dan psikologisnya."},
+      {title:"Mengenal CBT (Cognitive Behavioral Therapy)", date:"2025-03-10", excerpt:"CBT membantu mengganti pola pikir negatif menjadi lebih adaptif melalui latihan terstruktur."}
+    ];
+
+    function renderArticles(list = sampleArticles){
+      const box = document.getElementById('articles');
+      box.innerHTML = '';
+      list.forEach(a=>{
+        const div = document.createElement('div');
+        div.className = 'article-item';
+        div.innerHTML = `
+          <div style="width:84px;height:64px;border-radius:8px;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:grid;place-items:center;color:#fff;font-weight:800">
+            ${a.date.split('-')[0]}
+          </div>
+          <div style="flex:1">
+            <h4 style="margin:0">${a.title}</h4>
+            <div class="meta">${new Date(a.date).toLocaleDateString('id-ID')} • ${a.excerpt}</div>
+          </div>
+        `;
+        box.appendChild(div);
+      });
+    }
+    renderArticles();
+
+    function openEditor(){
+      // contoh menambah artikel (user bisa ganti ini dengan editor lengkap)
+      const now = new Date().toISOString().slice(0,10);
+      sampleArticles.unshift({title:"Artikel Baru — Edit Judul", date:now, excerpt:"Ringkasan singkat... (klik edit di kode untuk ganti)"});
+      renderArticles();
+      window.scrollTo({top: document.getElementById('artikel').offsetTop - 80, behavior:'smooth'});
+    }
+
+    /* ========== Simple helpers for privacy/terms ======= */
+    function openPrivacy(){
+      alert('Kebijakan Privasi: Semua data percakapan/form hanya disimpan sesuai persetujuan. (Ganti teks ini dengan kebijakan asli usaha Anda.)');
+    }
+    function openTerms(){
+      alert('Syarat & Ketentuan: Layanan bukan pengganti diagnosa medis profesional. (Ganti ini sesuai kebutuhan.)');
+    }
+
+    /* ========== Accessibility: keyboard close mobile menu ========== */
+    document.addEventListener('keydown', (e)=>{
+      if(e.key === 'Escape') document.getElementById('mobileMenu').classList.remove('show');
+    });
+
+    /* ========== Tip: Replace name in header/footer quickly ========== */
+    (function applyBusinessName(){
+      try{
+        document.querySelector('.brand div > div').textContent = SETTINGS.businessName;
+        document.querySelector('title').textContent = SETTINGS.businessName + " — Praktik Psikologi";
+        const logos = document.querySelectorAll('.logo');
+        logos.forEach(l => { /* leave initials or change */ });
+      }catch(e){}
+    })();
+  </script>
+</body>
+</html>
